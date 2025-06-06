@@ -1,0 +1,32 @@
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar DJ/Músico</title>
+</head>
+<body>
+    <h1>Adicionar Novo DJ/Músico</h1>
+    <form method="POST">
+        <p>
+            <label for="nome">Nome:</label><br>
+            <input type="text" id="nome" name="nome" required>
+        </p>
+        <p>
+            <label for="tipo">Tipo:</label><br>
+            <select id="tipo" name="tipo" required>
+                <option value="DJ">DJ</option>
+                <option value="Banda">Banda</option>
+                <option value="Músico Solo">Músico Solo</option>
+            </select>
+        </p>
+        <p>
+            <label for="horario">Horário:</label><br>
+            <input type="text" id="horario" name="horario" placeholder="Ex: 18:00-20:00" required>
+        </p>
+        <p>
+            <button type="submit">Adicionar</button>
+        </p>
+    </form>
+    <a href="/musicos">Voltar para Lista de DJ's e Músicos</a>
+</body>
+</html>

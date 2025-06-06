@@ -1,14 +1,12 @@
 import sqlite3
 import os
 
-# Caminho para o banco de dados dentro da pasta 'database'
+
 DATABASE_PATH = os.path.join('database', 'database.db')
 
-# Criar a pasta 'database' se não existir
 if not os.path.exists('database'):
     os.makedirs('database')
 
-# Função para conectar ao banco de dados
 def get_db_connection():
     try:
         conn = sqlite3.connect(DATABASE_PATH)
@@ -18,13 +16,13 @@ def get_db_connection():
         print(f"Erro ao conectar ao banco de dados: {e}")
         raise
 
-# Função para inicializar o banco de dados
+
 def init_database():
     conn = get_db_connection()
     cursor = conn.cursor()
 
     try:
-        # Criar a tabela 'casamento'
+        
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS casamento (
                 id INTEGER PRIMARY KEY,
@@ -34,7 +32,7 @@ def init_database():
             )
         ''')
 
-        # Criar a tabela 'convidados'
+        
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS convidados (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,12 +42,22 @@ def init_database():
             )
         ''')
 
-        # Verificar se a tabela 'casamento' está vazia e inserir dados iniciais
+        
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS musicos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT NOT NULL,
+                tipo TEXT,
+                horario TEXT
+            )
+        ''')
+
+        
         cursor.execute('SELECT COUNT(*) FROM casamento')
         if cursor.fetchone()[0] == 0:
             cursor.execute('''
                 INSERT INTO casamento (id, data, local, hora)
-                VALUES (1, '15 de Agosto de 2025', 'Quinta das Flores, Lisboa', '16:00')
+                VALUES (1, '12 de Julho 2025', 'Quinta de Povos, Arouca', '12:00')
             ''')
 
         conn.commit()
@@ -71,6 +79,7 @@ def get_casamento_details():
     finally:
         conn.close()
 
+
 def get_convidados():
     conn = get_db_connection()
     try:
@@ -81,6 +90,7 @@ def get_convidados():
         return []
     finally:
         conn.close()
+
 
 def adicionar_convidado(nome, restricoes, confirmado):
     conn = get_db_connection()
@@ -93,6 +103,33 @@ def adicionar_convidado(nome, restricoes, confirmado):
         conn.commit()
     except sqlite3.Error as e:
         print(f"Erro ao adicionar convidado: {e}")
+        conn.rollback()
+    finally:
+        conn.close()
+
+def get_musicos():
+    conn = get_db_connection()
+    try:
+        musicos_list = conn.execute('SELECT * FROM musicos').fetchall()
+        return musicos_list
+    except sqlite3.Error as e:
+        print(f"Erro ao buscar músicos: {e}")
+        return []
+    finally:
+        conn.close()
+
+
+def adicionar_musico(nome, tipo, horario):
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO musicos (nome, tipo, horario)
+            VALUES (?, ?, ?)
+        ''', (nome, tipo, horario))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(f"Erro ao adicionar músico: {e}")
         conn.rollback()
     finally:
         conn.close()

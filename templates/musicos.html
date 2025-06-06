@@ -1,0 +1,32 @@
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ's e Músicos</title>
+</head>
+<body>
+    <h1>DJ's e Músicos</h1>
+    {% if musicos %}
+    <table border="1">
+        <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Horário</th>
+        </tr>
+        {% for musico in musicos %}
+        <tr>
+            <td>{{ musico.nome }}</td>
+            <td>{{ musico.tipo }}</td>
+            <td>{{ musico.horario }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Nenhum DJ ou músico adicionado ainda.</p>
+    {% endif %}
+    <form action="/adicionar-musico" method="get">
+        <button type="submit">Adicionar Novo DJ/Músico</button>
+    </form>
+    <a href="/">Voltar</a>
+</body>
+</html>
