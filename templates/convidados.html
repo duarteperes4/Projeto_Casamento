@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Convidados</title>
+</head>
+<body>
+    <h1>Lista de Convidados</h1>
+    {% if convidados %}
+    <table border="1">
+        <tr>
+            <th>Nome</th>
+            <th>Restrições Alimentares</th>
+            <th>Confirmado</th>
+        </tr>
+        {% for convidado in convidados %}
+        <tr>
+            <td>{{ convidado.nome }}</td>
+            <td>{{ convidado.restricoes }}</td>
+            <td>{{ convidado.confirmado }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Nenhum convidado adicionado ainda.</p>
+    {% endif %}
+    <p><a href="/adicionar-convidado">Adicionar Novo Convidado</a></p>
+    <a href="/">Voltar</a>
+</body>
+</html>

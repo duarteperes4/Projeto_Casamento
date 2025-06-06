@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Convidado</title>
+</head>
+<body>
+    <h1>Adicionar Novo Convidado</h1>
+    <form method="POST">
+        <p>
+            <label for="nome">Nome:</label><br>
+            <input type="text" id="nome" name="nome" required>
+        </p>
+        <p>
+            <label for="restricoes">Restrições Alimentares:</label><br>
+            <input type="text" id="restricoes" name="restricoes" placeholder="Ex: Vegetariana, Sem glúten">
+        </p>
+        <p>
+            <label for="confirmado">Confirmado:</label><br>
+            <select id="confirmado" name="confirmado" required>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
+        </p>
+        <p>
+            <button type="submit">Adicionar</button>
+        </p>
+    </form>
+    <a href="/convidados">Voltar para Lista de Convidados</a>
+</body>
+</html>
