@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback aos Wedding Planners</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Feedback aos Wedding Planners</h1>
+    <form method="POST">
+        <p>
+            <label for="nome">Nome (opcional):</label><br>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome">
+        </p>
+        <p>
+            <label for="comentario">Comentário:</label><br>
+            <textarea id="comentario" name="comentario" rows="5" cols="40" required placeholder="Escreva seu feedback aqui..."></textarea>
+        </p>
+        <p>
+            <button type="submit">Enviar Feedback</button>
+        </p>
+    </form>
+    <a href="/">Voltar</a>
+</body>
+</html>

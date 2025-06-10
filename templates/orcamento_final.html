@@ -1,0 +1,38 @@
+</head>
+<body>
+    <h1>Orçamento Final</h1>
+    <form method="POST">
+        <p>
+            <label for="catering">Catering (€):</label><br>
+            <input type="number" id="catering" name="catering" step="0.01" value="{{ orcamento.catering if orcamento else 0.0 }}" required>
+        </p>
+            <label for="decoracao">Decoração (€):</label><br>
+            <input type="number" id="decoracao" name="decoracao" step="0.01" value="{{ orcamento.decoracao if orcamento else 0.0 }}" required>
+        </p>
+        <p>
+            <label for="fotografia">Fotografia (€):</label><br>
+            <input type="number" id="fotografia" name="fotografia" step="0.01" value="{{ orcamento.fotografia if orcamento else 0.0 }}" required>
+        </p>
+        <p>
+            <label for="musica">Música (€):</label><br>
+            <input type="number" id="musica" name="musica" step="0.01" value="{{ orcamento.musica if orcamento else 0.0 }}" required>
+        </p>
+        <p>
+            <label for="outros">Outros (€):</label><br>
+            <input type="number" id="outros" name="outros" step="0.01" value="{{ orcamento.outros if orcamento else 0.0 }}" required>
+        </p>
+        <p>
+            <label for="total">Total (€):</label><br>
+            <input type="number" id="total" name="total" step="0.01" value="{{ orcamento.total if orcamento else 0.0 }}" readonly>
+        </p>
+        <p>
+            <label for="data_atualizacao">Data de Atualização:</label><br>
+            <input type="text" id="data_atualizacao" name="data_atualizacao" value="{{ orcamento.data_atualizacao if orcamento else '' }}" readonly>
+        </p>
+        <p>
+            <button type="submit">Atualizar Orçamento</button>
+        </p>
+    </form>
+    <a href="/">Voltar</a>
+</body>
+</html>

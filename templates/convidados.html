@@ -1,31 +1,32 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Convidados</title>
 </head>
 <body>
-    <h1>Lista de Convidados</h1>
-    {% if convidados %}
-    <table border="1">
-        <tr>
-            <th>Nome</th>
-            <th>Restrições Alimentares</th>
-            <th>Confirmado</th>
-        </tr>
-        {% for convidado in convidados %}
-        <tr>
-            <td>{{ convidado.nome }}</td>
-            <td>{{ convidado.restricoes }}</td>
-            <td>{{ convidado.confirmado }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% else %}
-    <p>Nenhum convidado adicionado ainda.</p>
-    {% endif %}
-    <p><a href="/adicionar-convidado">Adicionar Novo Convidado</a></p>
-    <a href="/">Voltar</a>
+    <h1 class="page-title">Lista de Convidados</h1>
+    
+    <div class="table-container">
+        <table class="guest-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Restrições Alimentares</th>
+                    <th>Confirmado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for convidado in convidados %}
+                <tr>
+                    <td>{{ convidado.nome }}</td>
+                    <td>{{ convidado.restricoes if convidado.restricoes else 'Nenhuma' }}</td>
+                    <td>{{ convidado.confirmado if convidado.confirmado else 'Não' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="links-container">
+        <a href="/adicionar-convidado" class="action-link">Adicionar Novo Convidado</a>
+        <a href="/excluir-convidado" class="action-link">Excluir Convidado</a>
+        <a href="/" class="back-link">Voltar</a>
+    </div>
 </body>
 </html>

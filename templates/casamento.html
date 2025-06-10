@@ -1,15 +1,32 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casamento de Ana e Francisco</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Casamento de Ana e Francisco </h1>
-    <p><strong>Data:</strong> {{ casamento.data }}</p>
-    <p><strong>Local:</strong> {{ casamento.local }}</p>
-    <p><strong>Hora:</strong> {{ casamento.hora }}</p>
-    <a href="/">Voltar</a>
+    <h1 class="casamento-title">Casamento de Ana e Francisco</h1>
+    
+    <div class="details-section">
+        <h2>Detalhes do Casamento</h2>
+        <p><strong>Data:</strong> {{ casamento.data }}</p>
+        <p><strong>Local:</strong> {{ casamento.local }}</p>
+        <p><strong>Hora:</strong> {{ casamento.hora }}</p>
+    </div>
+
+    <div class="catering-section">
+        <h2>Detalhes do Catering</h2>
+        {% if catering %}
+        <p><strong>Menu:</strong> {{ catering.menu }}</p>
+        <p><strong>Número de Convidados:</strong> {{ catering.numero_convidados }}</p>
+        <p><strong>Observações:</strong> {{ catering.observacoes if catering.observacoes else 'Nenhuma observação' }}</p>
+        {% else %}
+        <p>Informações de catering ainda não disponíveis.</p>
+        {% endif %}
+    </div>
+
+    <a href="/" class="back-link">Voltar</a>
 </body>
 </html>
