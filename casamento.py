@@ -110,7 +110,7 @@ def atualizar_catering(menu, numero_convidados, observacoes, data_atualizacao):
     finally:
         conn.close()
 
-# Função para buscar a lista de convidados
+
 def get_convidados():
     conn = get_db_connection()
     try:
@@ -122,7 +122,20 @@ def get_convidados():
     finally:
         conn.close()
 
-# Função para adicionar um novo convidado
+
+def excluir_convidado(convidado_id):
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM convidados WHERE id = ?', (convidado_id,))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(f"Erro ao excluir convidado: {e}")
+        conn.rollback()
+    finally:
+        conn.close()
+
+
 def adicionar_convidado(nome, restricoes, confirmado):
     conn = get_db_connection()
     try:

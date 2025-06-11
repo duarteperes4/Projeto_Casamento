@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Convidados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1 class="page-title">Lista de Convidados</h1>
@@ -23,9 +30,21 @@
         </table>
     </div>
 
+    <div class="remove-section">
+        <h2>Remover Convidado</h2>
+        <form method="POST" action="">
+            <select name="convidado_id" required>
+                <option value="">-- Selecione um convidado --</option>
+                {% for convidado in convidados %}
+                <option value="{{ convidado.id }}">{{ convidado.nome }} ({{ convidado.restricoes if convidado.restricoes else 'Nenhuma restrição' }})</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="remove-button">Remover Convidado</button>
+        </form>
+    </div>
+
     <div class="links-container">
         <a href="/adicionar-convidado" class="action-link">Adicionar Novo Convidado</a>
-        <a href="/excluir-convidado" class="action-link">Excluir Convidado</a>
         <a href="/" class="back-link">Voltar</a>
     </div>
 </body>
