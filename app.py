@@ -75,6 +75,7 @@ def convidados():
 
 
 
+
 @app.route('/adicionar-convidado', methods=['GET', 'POST'])
 def adicionar_convidado_page():
     if request.method == 'POST':
