@@ -8,6 +8,12 @@
     <style>
         body {
             background-color: #E6F0FA; /* Fundo azul claro */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .login-container {
             max-width: 400px;
@@ -46,7 +52,18 @@
         }
         .flash-message.success { background-color: #dff0d8; color: #3c763d; }
         .flash-message.error { background-color: #f2dede; color: #a94442; }
-        .flash-message.info { background-color: #d9edf7; color: #31708f; }
+        .forgot-password {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .forgot-password a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +81,7 @@
             <input type="password" name="password" placeholder="Senha" required>
             <button type="submit">Entrar</button>
         </form>
+        <div class="forgot-password"><a href="#">Esqueceu-se da senha?</a></div>
     </div>
 </body>
 </html>

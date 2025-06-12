@@ -35,10 +35,13 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('logged_in', None)
-    session.pop('username', None)
-    flash('Você saiu da sessão.', 'info')
+    print("A tentar fazer logout...", session.get('logged_in'))
+    session.clear()  
+    print("Após logout, sessão:", session.get('logged_in'))
+    flash('Saiste da sessão.', 'info')
     return redirect(url_for('login'))
+
+
 
 # Rota para a página de detalhes do casamento
 @app.route('/casamento', methods=['GET', 'POST'])
