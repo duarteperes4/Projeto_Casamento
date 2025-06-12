@@ -1,14 +1,85 @@
+<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DJ's e Músicos</title>
-      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background: url('{{ image_url }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .musician-table {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .musician-table th, .musician-table td {
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+        }
+        .musician-table th {
+            background-color: #1a2a44;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        .musician-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .musician-table tr:hover {
+            background-color: #e6f0fa;
+        }
+        .add-form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .add-form input, .add-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        .add-button, .back-button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .add-button {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        .add-button:hover {
+            background-color: #45a049;
+        }
+        .back-button {
+            background-color: #ff4d4d;
+            color: #fff;
+        }
+        .back-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
 </head>
 <body>
-    <h1>DJ's e Músicos</h1>
-    {% if musicos %}
-    <table border="1">
+    <h1 class="welcome-title">DJ's e Músicos</h1>
+    <table class="musician-table">
         <tr>
             <th>Nome</th>
             <th>Tipo</th>
@@ -22,12 +93,16 @@
         </tr>
         {% endfor %}
     </table>
-    {% else %}
-    <p>Nenhum DJ ou músico adicionado ainda.</p>
-    {% endif %}
-    <form action="/adicionar-musico" method="get">
-        <button type="submit">Adicionar Novo DJ/Músico</button>
+    <form method="POST" action="{{ url_for('adicionar_musico') }}" class="add-form">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <select name="tipo" required>
+            <option value="Músico Solo">Músico Solo</option>
+            <option value="Banda">Banda</option>
+            <option value="DJ">DJ</option>
+        </select>
+        <input type="text" name="horario" placeholder="Horário (ex.: 18:00)" pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$" title="Formato HH:MM (ex.: 18:00)" required>
+        <button type="submit" class="add-button">Adicionar Novo DJ/Músico</button>
+        <a href="{{ url_for('index') }}" class="back-button">Voltar</a>
     </form>
-    <a href="/">Voltar</a>
 </body>
 </html>

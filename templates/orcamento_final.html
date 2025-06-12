@@ -1,38 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento Final</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background: url('{{ image_url }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .budget-table {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .budget-table th, .budget-table td {
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+        }
+        .budget-table th {
+            background-color: #1a2a44;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        .budget-table td {
+            font-weight: 600;
+        }
+        .budget-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .budget-table tr:hover {
+            background-color: #e6f0fa;
+        }
+        .update-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .update-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1>Orçamento Final</h1>
-    <form method="POST">
-        <p>
-            <label for="catering">Catering (€):</label><br>
-            <input type="number" id="catering" name="catering" step="0.01" value="{{ orcamento.catering if orcamento else 0.0 }}" required>
-        </p>
-            <label for="decoracao">Decoração (€):</label><br>
-            <input type="number" id="decoracao" name="decoracao" step="0.01" value="{{ orcamento.decoracao if orcamento else 0.0 }}" required>
-        </p>
-        <p>
-            <label for="fotografia">Fotografia (€):</label><br>
-            <input type="number" id="fotografia" name="fotografia" step="0.01" value="{{ orcamento.fotografia if orcamento else 0.0 }}" required>
-        </p>
-        <p>
-            <label for="musica">Música (€):</label><br>
-            <input type="number" id="musica" name="musica" step="0.01" value="{{ orcamento.musica if orcamento else 0.0 }}" required>
-        </p>
-        <p>
-            <label for="outros">Outros (€):</label><br>
-            <input type="number" id="outros" name="outros" step="0.01" value="{{ orcamento.outros if orcamento else 0.0 }}" required>
-        </p>
-        <p>
-            <label for="total">Total (€):</label><br>
-            <input type="number" id="total" name="total" step="0.01" value="{{ orcamento.total if orcamento else 0.0 }}" readonly>
-        </p>
-        <p>
-            <label for="data_atualizacao">Data de Atualização:</label><br>
-            <input type="text" id="data_atualizacao" name="data_atualizacao" value="{{ orcamento.data_atualizacao if orcamento else '' }}" readonly>
-        </p>
-        <p>
-            <button type="submit">Atualizar Orçamento</button>
-        </p>
-    </form>
-    <a href="/">Voltar</a>
+    <h1 class="welcome-title">Orçamento Final</h1>
+    <table class="budget-table">
+        <tr>
+            <th>Gastos</th>
+            <th>Valor (€)</th>
+        </tr>
+        <tr>
+            <td>Catering</td>
+            <td>2000.0</td>
+        </tr>
+        <tr>
+            <td>Decoração</td>
+            <td>1200.0</td>
+        </tr>
+        <tr>
+            <td>Fotografia</td>
+            <td>600.0</td>
+        </tr>
+        <tr>
+            <td>Música</td>
+            <td>800.0</td>
+        </tr>
+        <tr>
+            <td>Outros</td>
+            <td>300.0</td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>3900.0</strong></td>
+        </tr>
+    </table>
+    <p><strong>Data da Atualização:</strong> 2025-06-10 11:57</p>
+    <button class="update-button">Atualizar Orçamento</button>
 </body>
 </html>

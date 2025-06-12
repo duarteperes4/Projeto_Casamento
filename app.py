@@ -41,6 +41,8 @@ def convidados():
             return redirect('/convidados')
     return render_template('convidados.html', convidados=convidados_list)
 
+
+
 @app.route('/adicionar-convidado', methods=['GET', 'POST'])
 def adicionar_convidado_page():
     if request.method == 'POST':
@@ -61,15 +63,14 @@ def musicos():
         return f"Erro ao carregar o template 'musicos.html': {str(e)}", 500
 
 # Rota para adicionar um novo DJ/músico
-@app.route('/adicionar-musico', methods=['GET', 'POST'])
-def adicionar_musico_route():
-    if request.method == 'POST':
-        nome = request.form['nome']
-        tipo = request.form['tipo']
-        horario = request.form['horario']
-        adicionar_musico(nome, tipo, horario)
-        return redirect(url_for('musicos'))
-    return render_template('adicionar_musico.html')
+@app.route('/adicionar_musico', methods=['POST'])
+def adicionar_musico():
+    global musicos
+    nome = request.form['nome']
+    tipo = request.form['tipo']
+    horario = request.form['horario']
+    musicos.append({'nome': nome, 'tipo': tipo, 'horario': horario})
+    return redirect(url_for('musicos'))
 
 @app.route('/wedding-planners', methods=['GET', 'POST'])
 def wedding_planners():
@@ -95,6 +96,7 @@ def orcamento_final():
         atualizar_orcamento_final(catering, decoracao, fotografia, musica, outros, total, data_atualizacao)
         return redirect(url_for('orcamento_final'))
     return render_template('orcamento_final.html', orcamento=orcamento)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
