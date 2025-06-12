@@ -1,15 +1,44 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session,flash
 from casamento import get_casamento_details, get_catering, atualizar_catering, get_convidados, adicionar_convidado, get_musicos, adicionar_musico, adicionar_feedback, get_orcamento_final, atualizar_orcamento_final
 from datetime import datetime
+import os 
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24) 
+
+USERS= {'duarteperes4' : 'Duarteperes'}
 
 @app.route('/')
 def index():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     print("Rota / acessada em", datetime.now())
     image_url = url_for('static', filename='images/casamento.jpg')
     print(f"URL da imagem gerada: {image_url}")
     return render_template('index.html', image_url=image_url)
+
+
+# Rota de login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username in USERS and USERS[username] == password:
+            session['logged_in'] = True
+            session['username'] = username
+            flash('Login realizado com sucesso!', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Usuário ou senha inválidos.', 'error')
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    session.pop('username', None)
+    flash('Você saiu da sessão.', 'info')
+    return redirect(url_for('login'))
 
 # Rota para a página de detalhes do casamento
 @app.route('/casamento', methods=['GET', 'POST'])
